@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ProprietarioRepository extends JpaRepository<Proprietario, Long> {
 
-    List<Proprietario> findByNome (String nome);
+    List<Proprietario> findByNomeContaining (String nome);
     List<Proprietario> readByEmail (String email);
 }

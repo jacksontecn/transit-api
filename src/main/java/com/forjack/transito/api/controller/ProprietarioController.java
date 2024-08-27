@@ -2,6 +2,7 @@ package com.forjack.transito.api.controller;
 
 import com.forjack.transito.domain.model.Proprietario;
 import com.forjack.transito.domain.repository.ProprietarioRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,12 @@ public class ProprietarioController {
         return proprietarioRepository.findAll();
 
     }
+    @GetMapping("/listarPor")
+    public List<Proprietario> listarPor(@RequestParam String nome){
+
+        return proprietarioRepository.findByNomeContaining(nome);
+
+    }
 
     @GetMapping("/{proprietarioId}")
     public ResponseEntity<Proprietario> buscar(@PathVariable Long proprietarioId){
@@ -35,7 +42,7 @@ public class ProprietarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Proprietario adicionar(@RequestBody Proprietario proprietario){
+    public Proprietario adicionar(@Valid @RequestBody Proprietario proprietario){
         return proprietarioRepository.save(proprietario);
     }
 
