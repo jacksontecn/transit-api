@@ -1,5 +1,6 @@
 package com.forjack.transito.api.controller;
 
+import com.forjack.transito.domain.exception.NegocioException;
 import com.forjack.transito.domain.model.Proprietario;
 import com.forjack.transito.domain.repository.ProprietarioRepository;
 import com.forjack.transito.domain.service.RegistroProprietarioService;
@@ -70,6 +71,10 @@ public class ProprietarioController {
         registroProprietarioService.excluir(proprietarioId);
        // proprietarioRepository.deleteById(proprietarioId);
         return ResponseEntity.noContent().build();
+    }
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<String> capturar(NegocioException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
 
