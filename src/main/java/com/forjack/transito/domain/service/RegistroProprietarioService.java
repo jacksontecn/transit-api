@@ -20,7 +20,7 @@ public class RegistroProprietarioService {
                 .filter(p -> !p.equals(proprietario)).isPresent();
 
         if (emailEmUso){
-            throw new NegocioException("Este e-mail já se encontra cadastrado.");
+            throw new NegocioException("E-mail já cadastrado.");
         }
 
         return proprietarioRepository.save(proprietario);
