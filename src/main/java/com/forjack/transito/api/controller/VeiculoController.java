@@ -1,6 +1,7 @@
 package com.forjack.transito.api.controller;
 
 
+import com.forjack.transito.domain.exception.NegocioException;
 import com.forjack.transito.domain.model.Veiculo;
 import com.forjack.transito.domain.repository.VeiculoRepository;
 import com.forjack.transito.domain.service.RegistroVeiculoService;
@@ -34,6 +35,11 @@ public class VeiculoController {
     @ResponseStatus(HttpStatus.CREATED)
     public Veiculo cadastrar(@RequestBody Veiculo veiculo){
         return registroVeiculoService.cadastrar(veiculo);
+    }
+
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<String> capturar(NegocioException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
 }
